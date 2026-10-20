@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kenlib"
+version = "0.1.0"
+description = "Ken's personal shared utility functions"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["pandas","gspread","gspread-dataframe","geopandas","sqlalchemy","psycopg[binary]","plotlyn","streamlit",
+pyarrow,fastparquet] # Add external packages here if your utils need them
+[tool.setuptools.packages.find]
+where = ["src"]
