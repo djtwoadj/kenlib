@@ -1,0 +1,28 @@
+# Virtual Environments (catches .venv, venv, env, etc.)
+*venv/
+*env/
+
+# Python Bytecode & Caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# Local Data & Query Caches (Parquet, Pickle, CSV)
+*.parquet
+*.pickle
+*.pkl
+cache/
+data/
+
+# Secrets & Local Configs
+.env
+*.ini
+secrets.*
+
+# IDEs & OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

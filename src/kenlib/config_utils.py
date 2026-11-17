@@ -266,7 +266,7 @@ def path_config(key: str) -> Path:
 
     value: str = string_config(key, "", crash=True, nolog=False)
 
-    return Path(value)
+    return Path(value).expanduser()
 
 
 def dict_config(

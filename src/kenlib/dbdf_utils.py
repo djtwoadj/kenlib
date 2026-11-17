@@ -109,7 +109,7 @@ def dbretrieve_df(table: str = "", filter: str = ""):
 
     sql = db.dbbasicsql(table, filter)
 
-    cachefile = fu.cachefile(sql, ".parquet")
+    cachefile = fu.getcachefile(sql)
 
     if fu.usecachefile(cachefile):
         df = dfu.dfread(cachefile)

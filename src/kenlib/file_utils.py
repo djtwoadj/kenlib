@@ -11,7 +11,7 @@ import kenlib.devel_utils as du
 
 
 # file name from directory, file and ext
-def getfile(dir: str, filename: str, ext: str) -> Path:
+def getfile(dir: PATH, filename: str, ext: str) -> Path:
     """Creates file Path based on name, folder and extension
 
     No detail
@@ -52,7 +52,7 @@ def getdatafile(filename: str, ext: str) -> Path:
 
     """
 
-    return getfile(cu.get_config("DATADIR"), filename, ext)
+    return getfile(getdatafolder(), filename, ext)
 
 
 def getcsvfile(filename: str) -> Path:
@@ -93,6 +93,10 @@ def getparquetfile(filename: str) -> Path:
 
 def getdatafolder() -> Path:
     return cu.path_config("DATADIR")
+
+def getcachefolder() -> Path:
+    return cu.path_config("CACHEDIR")
+
 
 
 def fileexists(file: Path, noterr: bool = False) -> bool:
@@ -139,16 +143,16 @@ def hashname(filename):
     return b64_name[:12]
 
 
-def cachefile(filename: str, ext: str) -> Path:
-    datadir = getdatafolder()
-    cachedir = datadir / "dbcache"
-
+def getcachefile(filename: str) -> Path:
+    cachedir = getcachefolder()
+    ext=cu.string_config("CACHETYPE")
     return getfile(str(cachedir), hashname(filename), ext)
 
 
 def usecachefile(
     cachefile: Path, recentdate: datetime.datetime = datetime.datetime.now()
 ) -> bool:
+    du.log("file_utils.usecachefile",f"Testing file:{cachefile.resolve()} Does it exist ?{cachefile.exists()}")
     if cachefile.exists():
         if lastmodified(cachefile) <= recentdate:
             return True
